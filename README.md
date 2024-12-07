@@ -75,7 +75,7 @@ Provide URLs or PDFs through the upload page. The app processes the reports and 
 ---
 
 
-[![Watch the video](https://youtu.be/wppA5VPP4x0/0.jpg)](https://youtu.be/wppA5VPP4x0)
+[![Watch the video](https://youtu.be/vi/wppA5VPP4x0/0.jpg)](https://youtu.be/wppA5VPP4x0)
 
 ---
 ### **Are There Any Bugs?**
