@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Upload Incident Reports</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin: auto;
+            max-width: 500px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        textarea, input, select {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .preview-section {
+            margin: auto;
+            max-width: 600px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .preview-section h2 {
+            color: #333;
+        }
+        .preview-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .preview-images img {
+            width: 150px;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Incident Reports</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="urls">Enter Incident Report URLs (one per line):</label>
+        <textarea name="urls" rows="5" cols="50" placeholder="https://example.com/report1.pdf"></textarea><br>
+        
+        <label for="files">Or Upload Incident Report PDFs:</label>
+        <input type="file" name="files" multiple><br>
+
+        <!-- <label for="visualization_type">Choose Visualization Type:</label>
+        <select name="visualization_type">
+            <option value="bar_chart">Bar Chart (Incident Types)</option>
+            <option value="scatter_plot">Scatter Plot (Clusters)</option>
+            <option value="heatmap">Heatmap (Frequency by Hour)</option>
+            <option value="all">All Visualizations</option>
+        </select><br> -->
+        
+        <!-- <label for="num_clusters">Specify Number of Clusters (optional):</label>
+        <input type="number" name="num_clusters" min="2" placeholder="Leave empty for automatic clustering"><br> -->
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="preview-section">
+        <h2>Visualization Previews</h2>
+        <div class="preview-images">
+            <img src="static/incident_bar_graph.png" alt="Bar Chart Preview" title="Bar Chart">
+            <img src="static/incident_scatter_plot.png" alt="Scatter Plot Preview" title="Scatter Plot">
+            <img src="static/incident_heatmap.png" alt="Heatmap Preview" title="Heatmap">
+        </div>
+    </div>
+</body>
+</html>

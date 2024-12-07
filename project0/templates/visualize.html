@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Visualization Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .card {
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 20px;
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .card button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #0056b3;
+        }
+        .summary {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Visualization Overview</h1>
+
+    <div class="summary">
+        <h2>Total Incidents: {{ total_incidents }}</h2>
+        <h3>Cluster Summaries:</h3>
+        <ul>
+            {% for summary in cluster_summaries %}
+            <li>
+                <strong>Cluster {{ summary.cluster }}:</strong> {{ summary.count }} incidents<br>
+                <ul>
+                    {% for type, count in summary.types.items() %}
+                    <li>{{ type }}: {{ count }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <img src="{{ bar_image }}" alt="Bar Chart">
+            <button onclick="window.location.href='{{ bar_image }}';">View Bar Chart</button>
+        </div>
+        <div class="card">
+            <img src="{{ scatter_image }}" alt="Scatter Plot">
+            <button onclick="window.location.href='{{ scatter_image }}';">View Scatter Plot</button>
+        </div>
+        <div class="card">
+            <img src="{{ heatmap_image }}" alt="Heatmap">
+            <button onclick="window.location.href='{{ heatmap_image }}';">View Heatmap</button>
+        </div>
+        <div class="card">
+            <button onclick="window.location.href='/process?filepaths={{ request.args.filepaths }}';">View All Plots</button>
+        </div>
+    </div>
+</body>
+</html>
