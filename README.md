@@ -75,7 +75,7 @@ Provide URLs or PDFs through the upload page. The app processes the reports and 
 ---
 
 
-[![Watch the video](https://img.youtube.com/vi/wppA5VPP4x0/0.jpg)](https://youtu.be/wppA5VPP4x0)
+[![Watch the video](https://img.youtube.com/vi/EXcmKuleRTU/0.jpg)](https://youtu.be/EXcmKuleRTU)
 
 ---
 ### **Are There Any Bugs?**
@@ -83,6 +83,7 @@ Provide URLs or PDFs through the upload page. The app processes the reports and 
 Yes, there are a few known issues:
 1. **Missed Incidents**: If multiple URLs or PDFs are processed simultaneously, the system might miss one or two incidents.
 2. **Heatmap Scaling**: When incidents are sparse, the heatmap might look a little off.
+3. **Images closing**: When opened corresponding images with view buttons, we have to click left arrow to go back and no X option for closing that.
 
 ---
 

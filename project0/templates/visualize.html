@@ -4,11 +4,61 @@
     <title>Visualization Overview</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            background-color: #000;
+            color: #00ff00;
+            overflow: auto;
         }
-        h1, h2 {
+        h1, h2, h3 {
             text-align: center;
+            color: #00ff00;
+        }
+        h1::after {
+            content: '|';
+            display: inline-block;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+        .typing {
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 4s steps(40, end), blink 1s step-end infinite;
+            border-right: 2px solid #00ff00;
+        }
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+        .summary {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            background: rgba(17, 17, 17, 0.9);
+            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.4);
+            z-index: 10;
+            position: relative;
+        }
+        .summary ul {
+            list-style: none;
+            padding: 0;
+        }
+        .summary li {
+            margin-bottom: 10px;
         }
         .container {
             display: flex;
@@ -19,11 +69,14 @@
         }
         .card {
             width: 300px;
-            border: 1px solid #ccc;
+            border: 2px solid #00ff00;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background: rgba(17, 17, 17, 0.9);
+            box-shadow: 0 4px 10px rgba(0, 255, 0, 0.4);
             text-align: center;
             padding: 20px;
+            z-index: 10;
+            position: relative;
         }
         .card img {
             width: 100%;
@@ -31,29 +84,60 @@
             border-radius: 8px;
         }
         .card button {
-            background-color: #007BFF;
-            color: white;
+            background-color: #00ff00;
+            color: #111;
             padding: 10px 15px;
             font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
         .card button:hover {
-            background-color: #0056b3;
+            background-color: #00cc00;
         }
-        .summary {
-            max-width: 800px;
+        .home-button {
+            display: block;
             margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background-color: #00ff00;
+            color: #111;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            width: 200px;
+        }
+        .home-button:hover {
+            background-color: #00cc00;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .moon {
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at 50% 50%, #fff, #ccc);
+            border-radius: 50%;
+            box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.5);
+            z-index: 5;
         }
     </style>
 </head>
 <body>
-    <h1>Visualization Overview</h1>
+    <h1 class="typing">Visualization Overview</h1>
+
+    <button class="home-button" onclick="window.location.href='/';">Home</button>
 
     <div class="summary">
         <h2>Total Incidents: {{ total_incidents }}</h2>
@@ -89,5 +173,45 @@
             <button onclick="window.location.href='/process?filepaths={{ request.args.filepaths }}';">View All Plots</button>
         </div>
     </div>
+
+    <div class="moon"></div>
+
+    <script>
+        // Create shooting stars
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        document.body.appendChild(canvas);
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = Array(100).fill().map(() => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            speed: Math.random() * 3 + 2,
+            length: Math.random() * 20 + 10
+        }));
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.moveTo(star.x, star.y);
+                ctx.lineTo(star.x - star.length, star.y + star.length);
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                star.x += star.speed;
+                star.y -= star.speed;
+
+                if (star.x > canvas.width || star.y < 0) {
+                    star.x = Math.random() * canvas.width;
+                    star.y = Math.random() * canvas.height;
+                }
+            });
+            requestAnimationFrame(drawStars);
+        }
+
+        drawStars();
+    </script>
 </body>
 </html>
