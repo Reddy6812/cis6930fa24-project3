@@ -89,17 +89,6 @@ Yes, there are a few known issues:
 
 ---
 
-### **What Resources Helped Me?**
-
-Here are some of the resources that I referred to while building this project:
-1. [Flask Documentation](https://flask.palletsprojects.com/)
-2. [Matplotlib Documentation](https://matplotlib.org/)
-3. [UMAP Documentation](https://umap-learn.readthedocs.io/)
-4. [Scikit-learn Documentation](https://scikit-learn.org/)
-5. [Pandas Documentation](https://pandas.pydata.org/)
-
----
-
 ### **Challenges Faced**
 
 1. Figuring out dynamic clustering with silhouette scores was tricky. It took some time to get it right, especially with larger datasets.
