@@ -1,96 +1,122 @@
-# cis6930fa24 -- Project0
+## Project: cis6930fa24-project3
 
-Name: Vijay Kumar Reddy Gade
+### Name: Vijay Kumar Reddy Gade
 
-## Assignment Description 
+---
 
-this project automatically extracts incident data from the norman, oklahoma police department’s incident report pdf files. it processes the incident information and stores it in a sqlite database, which can then be queried for a summary of incident types. specific fields like the date/time, incident number, location, nature, and ori are parsed and stored in a database.
+### **What is this Project About?**
 
-## HOW TO INSTALL
+This project is all about processing incident report PDFs or URLs and making sense of the data through meaningful visualizations. It allows users to upload or provide URLs for incident reports, processes the data, and generates insightful visuals like bar charts, scatter plots, and heatmaps. The goal is to help analyze incident trends dynamically and visually.
 
-1. INSTALL PIPENV IF YOU DON'T HAVE IT:
+---
+
+### **How to Install**
+
+1. **Install Pipenv**  
+   First, you'll need Pipenv to manage dependencies. Install it using this command:  
    ```bash
    pip install pipenv
    ```
 
-2. INSTALL THE PROJECT DEPENDENCIES:
+2. **Install the Required Dependencies**  
+   Navigate to the project directory and run:  
    ```bash
    pipenv install
    ```
 
-3. MAKE SURE YOU HAVE `pypdf` INSTALLED VIA THE `PIPFILE`.
+3. **Run the Application**  
+   Start the application with the following command:  
+   ```bash
+   pipenv run python project0/main.py
+   ```
 
-## HOW TO RUN
+---
 
-TO RUN THE SCRIPT WITH A SAMPLE PDF URL, USE THE FOLLOWING COMMAND:
+### **How Does It Work?**
 
-```bash
-pipenv run python project0/main.py --incidents <URL_OF_INCIDENT_PDF>
-```
-- Testing:
-```bash
-pipenv run python -m pytest
-```
-EXAMPLE:
+Once the application is running, open your browser and go to `http://127.0.0.1:5000`. Here’s what you can do:
 
-```bash
-pipenv run python project0/main.py --incidents "https://www.normanok.gov/sites/default/files/documents/2024-08/2024-08-07_daily_incident_summary.pdf"
-```
+- **Upload Incident Reports**  
+  - Enter one or more URLs for incident reports.
+  - Or, upload PDFs containing incident data.
 
-DEMO OF EXECUTION:
+- **Visualizations**  
+  After processing, the application generates:
+  1. **Bar Chart**: See how many incidents occurred for each type.
+  2. **Scatter Plot**: View clusters of incident types in a reduced dimensional space using UMAP.
+  3. **Heatmap**: Understand how incidents are distributed across different hours of the day.
 
-[![Watch the video](https://img.youtube.com/vi/tlGpP4r7wa0/0.jpg)](https://www.youtube.com/watch?v=tlGpP4r7wa0)
+---
 
+### **How to Use It**
 
-## FUNCTIONS
+#### 1. Upload Your Data
+Provide URLs or PDFs through the upload page. The app processes the reports and redirects you to the visualization page.
 
-#### `fetchincidents(url)`
-- Downloads the PDF file from the specified URL and saves it locally and returns the path of the saved PDF.
+#### 2. Check Out the Visualizations
+- **Bar Chart**: Understand the frequency of incidents by type.
+- **Scatter Plot**: See dynamic clusters of similar incidents grouped together.
+- **Heatmap**: Analyze incident trends by time of day and type.
 
-#### `extractincidents(pdf_file_path)`
-- Extracts incident information from the PDF and returns A list of dictionaries, each containing incident details like incident time, number, location, nature, and ORI.
+#### 3. Interactive Features
+- Navigate to view individual plots like the bar chart, scatter plot, or heatmap.
+- Get a summary of clusters and incident types.
 
-#### `createdb()`
-- Creates a SQLite database (`normanpd.db`) in the `resources/` directory and returns A connection object to the SQLite database.
+---
 
-#### `populatedb(db, data)`
-- Inserts the extracted incident data into the database and SQLite database connection and the extracted incident data.
+### **What Does Each Function Do?**
 
-#### `status(db)`
-- Prints a summary of incidents, grouped by nature, in alphabetical order.
+- **`upload_file`**: Handles the upload of URLs or PDFs and sends the data for processing.
+- **`process_files`**: Processes the uploaded reports, generates visualizations, and summarizes incident clusters.
+- **`fetchincidents`**: Downloads incident reports from provided URLs.
+- **`extractincidents`**: Extracts meaningful data from uploaded incident PDFs.
+- **`suggest_optimal_clusters`**: Dynamically calculates the best number of clusters using silhouette scores.
 
-## DATABASE DEVELOPMENT
+---
 
-- **Schema**: A table named `incidents` is created with the following columns:
-  - `incident_time`: TEXT
-  - `incident_number`: TEXT
-  - `incident_location`: TEXT
-  - `nature`: TEXT
-  - `incident_ori`: TEXT
+### **Are There Any Bugs?**
 
-- **Approach**: The data is extracted using regex patterns and parsed into a structured format. It is then inserted into a SQLite database for efficient querying and storage.
+Yes, there are a few known issues:
+1. **Missed Incidents**: If multiple URLs or PDFs are processed simultaneously, the system might miss one or two incidents.
+2. **Heatmap Scaling**: When incidents are sparse, the heatmap might look a little off.
 
-## BUGS AND ASSUMPTIONS
+---
 
-- **Bugs**:
-  - **Location Formatting Issue**: The current regex patterns may fail to capture locations that are not entirely in uppercase (e.g., `504 N Ponca AV` instead of `504 N PONCA AV`). This issue occurs because the parser expects locations to always be uppercase. This causes failures in parsing locations for incidents where mixed case is used.
-  - **Handling of Line Breaks**: If unexpected line breaks occur within the PDF text, some incidents might not be captured correctly.
+### **Some Assumptions**
 
-- **Assumptions**:
-  - The format of the incident reports will remain consistent.
-  - All location data is expected to be in uppercase.
-  - The extracted fields such as date/time, location, and nature will follow a predictable format that can be parsed using regular expressions.
+1. URLs provided for incident reports are valid and accessible.
+2. PDFs follow a standard format that allows for consistent data extraction.
 
-## CHALLENGES
+---
 
-1. **Inconsistent Case in Locations**: Some incident locations use mixed case (e.g., `504 N Ponca AV`), which can lead to failed extraction since the regex expects uppercase. This inconsistency should be accounted for in future versions of the parser.
+### **What Resources Helped Me?**
 
-2. **PDF Format Variability**: If the police department changes how the PDFs are formatted (e.g., changes in text alignment or the order of data), the extraction logic may break, requiring updates to the regex patterns.
+Here are some of the resources that I referred to while building this project:
+1. [Flask Documentation](https://flask.palletsprojects.com/)
+2. [Matplotlib Documentation](https://matplotlib.org/)
+3. [UMAP Documentation](https://umap-learn.readthedocs.io/)
+4. [Scikit-learn Documentation](https://scikit-learn.org/)
+5. [Pandas Documentation](https://pandas.pydata.org/)
 
-## FUTURE IMPROVEMENTS
+---
 
-- **Location Parsing**: Implement more robust location parsing to handle both uppercase and mixed-case locations.
-- **Regex Flexibility**: Enhance the regular expressions to better handle edge cases and inconsistencies in the PDF text format.
-- **Error Reporting**: Add detailed error logs to better track issues during extraction and database insertion.
+### **Challenges Faced**
+
+1. Figuring out dynamic clustering with silhouette scores was tricky. It took some time to get it right, especially with larger datasets.
+2. Making sure data was extracted accurately from different PDFs required a lot of testing.
+3. Scaling visualizations for large data volumes while keeping them clear and readable was a bit of a challenge.
+
+---
+
+### **Future Improvements**
+
+1. **Speeding Up Processing**  
+   Parallelize the processing of multiple PDFs and URLs to make it faster.
+
+2. **Better Visualizations**  
+   Introduce more interactive charts using tools like Plotly or Dash.
+
+3. **Enhanced Error Handling**  
+   Add better messages for unsupported file formats or inaccessible URLs.
 
 ---
