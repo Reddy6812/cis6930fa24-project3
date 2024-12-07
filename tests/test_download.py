@@ -3,7 +3,7 @@ import pytest
 from project0.norman import fetchincidents
 
 # Test URL and expected PDF path
-url = "https://www.normanok.gov/sites/default/files/documents/2024-08/2024-08-01_daily_incident_summary.pdf"
+url = "https://www.normanok.gov/sites/default/files/documents/2024-10/2024-10-01_daily_incident_summary.pdf"
 pdf_path = "/tmp/daily_incident_summary.pdf"
 
 def test_f():

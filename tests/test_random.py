@@ -4,24 +4,24 @@ import sqlite3
 from project0.norman import extractincidents, createdb, populatedb, status, fetchincidents
 
 # Test PDF URL and database path
-pdf_url = "https://www.normanok.gov/sites/default/files/documents/2024-08/2024-08-01_daily_incident_summary.pdf"
+pdf_url = "https://www.normanok.gov/sites/default/files/documents/2024-10/2024-10-01_daily_incident_summary.pdf"
 db_path = "resources/normanpd.db"
 
 # Expected test data for validation
 expected_data = [
     {
-        "incident_time": "8/1/2024 0:04",
-        "incident_number": "2024-00055419",
-        "location": "1345 W LINDSEY ST",
-        "nature": "Traffic Stop",
+        "incident_time": "10/1/2024 0:03",
+        "incident_number": "2024-00071507",
+        "location": "1102 24TH AVE SE",
+        "nature": "Check Area",
         "incident_ori": "OK0140200"
     },
     {
-        "incident_time": "8/1/2024 11:16",
-        "incident_number": "2024-00015398",
-        "location": "900 N PORTER AVE",
-        "nature": "Abdominal Pains/Problems",
-        "incident_ori": "EMSSTAT"
+        "incident_time": "10/1/2024 0:36",
+        "incident_number": "2024-00071514",
+        "location": "3182 JENKINS AVE",
+        "nature": "Traffic Stop",
+        "incident_ori": "OK0140200"
     }
 ]
 
@@ -88,7 +88,7 @@ def test_status(capsys):
     # Capture the status function output
     status(db)
     captured = capsys.readouterr().out.splitlines()
-    exp_out = ["Abdominal Pains/Problems|1", "Traffic Stop|1"]
+    exp_out = ["Check Area|1", "Traffic Stop|1"]
     
     # Filter relevant lines and compare to expected output
     rel_lines = [l.strip() for l in captured if '|' in l]

@@ -29,7 +29,12 @@ This project is all about processing incident report PDFs or URLs and making sen
    ```bash
    pipenv run python project0/main.py
    ```
-
+4. - **Testing:**
+   ```bash
+   pipenv run python -m pytest
+   ```
+    - This will check if both url and file upload functionalities are working well, by taking a file realtime.
+      - Check if that url is valid/file exists, before running testing
 ---
 
 ### **How Does It Work?**
