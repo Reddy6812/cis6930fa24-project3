@@ -80,7 +80,7 @@ Provide URLs or PDFs through the upload page. The app processes the reports and 
 ---
 
 
-[![Watch the video](https://img.youtube.com/vi/EXcmKuleRTU/0.jpg)](https://youtu.be/EXcmKuleRTU)
+[![Watch the video](https://img.youtube.com/vi/RuF6V24d6o4/0.jpg)](https://youtu.be/RuF6V24d6o4)
 
 ---
 ### **Are There Any Bugs?**
